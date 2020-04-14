@@ -6,6 +6,7 @@ echo "Downloading Plesk installer..."
 Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Force
 $Url = "https://installer-win.plesk.com/plesk-installer.exe"
 $Output = "C:\Windows\Temp\plesk-installer.exe"
+[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
 $WebClient = New-Object System.Net.WebClient
 $WebClient.DownloadFile( $url , $Output)
 
