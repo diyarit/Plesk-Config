@@ -225,6 +225,12 @@ Restart-Service -Name "MailEnable SMTP Connector"
 echo "Setting up Plesk session time..."
 plesk db "update misc set val=600 where param='login_timeout'"
 
+echo "Setting up SSL notifications ..."
+& "$env:plesk_bin\notification.exe" --update -code ext-letsencrypt-notification-certificateAutoRenewalSucceed -send2admin false -send2reseller false -send2client false -send2email false
+& "$env:plesk_bin\notification.exe" --update -code ext-letsencrypt-notification-certificateAutoRenewalFailed -send2admin false -send2reseller false -send2client false -send2email false
+& "$env:plesk_bin\notification.exe" --update -code ext-sslit-notification-certificateAutoRenewalSucceed -send2admin false -send2reseller false -send2client false -send2email false
+& "$env:plesk_bin\notification.exe" --update -code ext-sslit-notification-certificateAutoRenewalFailed -send2admin false -send2reseller false -send2client false -send2email false
+
 echo "Final cleaning..."
 Remove-Item (Get-PSReadlineOption).HistorySavePath
 Remove-Item -Path $MyInvocation.MyCommand.Source
