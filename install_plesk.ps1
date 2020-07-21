@@ -140,6 +140,10 @@ Foreach-Object {
 	$content | %{$_ -replace "^display_errors.*","display_errors = On"} | Set-Content $_.FullName
 	$content = Get-Content $_.FullName
 	$content | %{$_ -replace "^error_reporting.*","error_reporting = E_ALL & ~E_DEPRECATED & ~E_STRICT"} | Set-Content $_.FullName
+        $content = Get-Content $_.FullName
+        $content | %{$_ -replace "^;extension=odbc","extension=odbc"} | Set-Content $_.FullName
+        $content = Get-Content $_.FullName
+        $content | %{$_ -replace "^;extension=pdo_odbc","extension=pdo_odbc"} | Set-Content $_.FullName
 }
 
 echo "Setting up timezone Horde Webmail..."
