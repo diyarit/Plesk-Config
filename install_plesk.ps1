@@ -63,7 +63,7 @@ $env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";"
 
 $AdminPassword = Read-Host -Prompt 'Password usuario "Administrator" '
 
-echo "Initial Plesk configuration..."
+echo "Plesk initial configuration..."
 & "$env:plesk_bin\init_conf.exe" -p -passwd "$AdminPassword" -license_agreed true -admin_info_not_required true
 
 echo "Installing license..."
@@ -79,6 +79,10 @@ $null = $Host.UI.RawUI.ReadKey('NoEcho,IncludeKeyDown');
 #& "$env:plesk_bin\license.exe" -i $License
 
 echo "Configuring Plesk..."
+
+echo "Configuring Hostname..."
+$hostname = Read-Host -Prompt 'Hostname '
+& "$env:plesk_bin\server_pref.exe" --update -hostname $hostname
 
 echo "Setting language..."
 & "$env:plesk_bin\locales.exe" --set-default en-US
