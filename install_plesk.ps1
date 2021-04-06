@@ -261,6 +261,9 @@ echo "Disabling Firewall rules..."
 Disable-NetFirewallRule -DisplayName "MariaDB 10.5 (x64)"
 Disable-NetFirewallRule -DisplayName "Client MySQL server"
 
+echo "Installing SQL Management Studio..."
+choco install sql-server-management-studio
+
 echo "Final cleaning..."
 Remove-Item (Get-PSReadlineOption).HistorySavePath
 Remove-Item -Path $MyInvocation.MyCommand.Source
